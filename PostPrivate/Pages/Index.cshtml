@@ -1,0 +1,146 @@
+﻿@page
+@model IndexModel
+
+@{
+    var photoPath = "~/images/" + (@Model.Profile.PhotoName ?? "/person.svg");
+    ViewData["Title"] = " - News Feed";
+}
+    <div class="row">
+        <div class="col-sm-3">
+            <ul class="list-group">
+                <li class="list-group-item listgroupitemclass">
+                    <a asp-page="/userprofile/details" asp-route-Id="@Model.Profile.Id">
+                        <div class="media">
+                            <img class="newsfeedthumbnail mr-3" src="@photoPath" asp-append-version="true" alt="...">
+                            <div class="media-body">
+                                <h5 class="mb-1">@Model.Profile.FName @Model.Profile.LName</h5>
+                            </div>
+                        </div>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="col-sm-6">
+            <div class="card">
+                <div class="card-header">
+                    <h6>Write Post</h6>
+                </div>
+                @*asp-page-handler="/AjaxPartialModel/OnPostNewsFeedPartial" enctype="multipart/form-data"*@
+                <form method="post" id="post" asp-page="AjaxPartialModel/OnPostNewsFeedPartial">
+                    <input type="hidden" asp-for="@Model.Post.TimpeStamp" value="@DateTime.Now.ToString("g")" />
+                    <input type="hidden" asp-for="@Model.UserId" value="@Model.UserId" />
+                    <div class="card-body" style="padding:0;">
+                        <div class="input-group mb-3" id="mb-3" style="margin-bottom:0;">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon1">
+                                    <img class="card-img-top newsfeedthumbnail postimg" src="@photoPath" asp-append-version="true" />
+                                </span>
+                            </div>
+                            <textarea asp-for="@Model.Post.TextField" type="text" rows="3" class="form-control" placeholder="What's Poppin?" aria-label="post" aria-describedby="basic-addon1"></textarea>
+                        </div>
+
+                    </div>
+                    <div class="card-footer">
+                        <div class="container">
+                            <div class="row">
+                                <div class="ml-auto">
+                                    <button id="submitpost" type="reset" class="btn btn-outline-primary">Post</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <h5>Suggested Friends</h5>
+            @foreach (var profile in Model.SuggestedList)
+            {
+                var profilePhotoPath = "~/images/" + (profile.PhotoName ?? "/person.svg");
+
+                <div class="col-sm-6">
+                    <ul class="list-group">
+                        <li class="list-group-item" style="margin-bottom:20px;">
+                            <div class="media">
+                                <img class="newsfeedthumbnail mr-3" src="@profilePhotoPath" asp-append-version="true" alt="...">
+                                <div class="media-body">
+                                    <a asp-page="/profile/details" asp-route-Id="@profile.Id"><h5 class="mb-1">@profile.FName @profile.LName</h5></a>
+                                    <small>Friends since @DateTime.Now.ToString("MMMM yyyy")</small>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            }
+        </div>
+    </div>
+    <br />
+    <div id="newsfeed">
+        @foreach (var post in Model.NewsFeed)
+        {
+            <div class="row">
+                <div class="col-sm-3">
+
+                </div>
+                <div class="col-sm-6">
+                    <div class="card-header">
+                        <div class="media">
+                            <img class="card-img-top newsfeedthumbnail postimg" src="@photoPath" asp-append-version="true" />&nbsp;&nbsp;
+                            <a asp-page="/userprofile/details" asp-route-Id="@post.ProfileId">
+                                <h3>@Model.Profile.FName  @Model.Profile.LName</h3>
+                            </a>
+                            <p>&nbsp;&nbsp;&nbsp;Posted @post.TimpeStamp</p>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h1>@post.TextField</h1>
+                    </div>
+                    <div class="card-footer" style="padding:0;">
+                        <div class="input-group mb-3" id="mb-3" style="margin-bottom:0;">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon1">
+                                    <button type="submit" class="btn btn-outline-primary">Comment</button>
+                                </span>
+                            </div>
+                            <textarea type="text" rows="1" class="form-control" placeholder="Comment..." aria-label="post" aria-describedby="basic-addon1"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br />
+        }
+    </div>
+        @*@if (!Model.noPostsExist)
+        {
+            <div class="col-sm-6">
+                <div id="newsfeed"></div>
+                <partial name="/Pages/Shared/_NewsFeedPartial.cshtml">
+            </div>
+        }*@
+
+    
+
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+<script src="~/lib/jquery-validation-unobtrusive/jquery.unobtrusive-ajax.js"></script>
+
+@section scripts{
+    <script>
+
+        $(document).ready(function () {
+            $("#submitpost").click(function () {
+
+                var data = $("#post").serialize();
+                $.ajax({
+                    type: "POST",
+                    url: "/index",
+                    data: data,
+                    success: function (response) {
+                        alert("Post Successful");
+                    }
+                })
+                //$("#newsfeed").load(location.href + " #newsfeed");
+            })
+        })
+    </script>
+}

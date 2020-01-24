@@ -1,0 +1,111 @@
+@page
+@model RegisterModel
+@{
+    ViewData["Title"] = "Register";
+}
+
+<div class="row">
+    <div class="col-md-5">
+        <h1 class="display-2">Post Private</h1>
+        <br />
+        <h4>Sign Up</h4>
+
+        <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
+            <hr />
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Input.Email"></label>
+                <input asp-for="Input.Email" class="form-control" />
+                <span asp-validation-for="Input.Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.Password"></label>
+                <input asp-for="Input.Password" class="form-control" />
+                <span asp-validation-for="Input.Password" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.ConfirmPassword"></label>
+                <input asp-for="Input.ConfirmPassword" class="form-control" />
+                <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+            </div>
+            <div class="form-group"><button type="submit" class="btn btn-outline-primary">Sign Up</button></div>
+            <div class="form-group">
+                <p>
+                    <a asp-page="./Login" asp-route-returnUrl="@Model.ReturnUrl">Log in existing user account</a>
+                </p>
+            </div>
+        </form>
+    </div>
+        <div class="jumbotron col-md-6 ml-auto">
+        <h1 class="display-3">Welcome!</h1>
+        <h4 class="display-4">Catch up with family & friends.</h4>
+        <p class="lead">
+            <img src="~/images/icons-1.0.0-alpha2/icons-1.0.0-alpha2/icons/lock.svg" id="lockicon" />
+            They sell your information. We secure it.
+        </p>
+        <p class="lead"><img src="~/images/flag-square-250.png" id="americanflagicon" /> They censor your voice. We welcome it.</p>
+        <p class="lead">
+            <img src="~/images/icons-1.0.0-alpha2/icons-1.0.0-alpha2/icons/check-circle.svg" id="checkicon" />
+            They clutter their sites. We streamline ours.
+        </p>
+        <hr class="my-4">
+        <a class="btn btn-outline-primary btn-lg" href="/about" role="button">Learn more</a>
+    </div>
+ </div>
+
+
+
+    @*<div class="col-md-4 ml-auto">
+            <h3>Catch up with family & friends.</h3>
+            <br />
+            <br />
+            <h6>
+                <img src="~/images/icons-1.0.0-alpha2/icons-1.0.0-alpha2/icons/lock.svg" id="lockicon" />
+                They sell your information. We secure it.
+            </h6>
+            <br />
+            <h6><img src="~/images/flag-square-250.png" id="americanflagicon" /> They censor your voice. We welcome it.</h6>
+            <br />
+            <h6>
+                <img src="~/images/icons-1.0.0-alpha2/icons-1.0.0-alpha2/icons/check-circle.svg" id="checkicon" />
+                They clutter their sites. We streamline ours.
+            </h6>
+
+        </div>*@
+
+
+    @*<div class="col-md-6 col-md-offset-2">
+            <section>
+                <h4>Use another service to register.</h4>
+                <hr />
+                @{
+                    if ((Model.ExternalLogins?.Count ?? 0) == 0)
+                    {
+                        <div>
+                            <p>
+                                There are no external authentication services configured. See <a href="https://go.microsoft.com/fwlink/?LinkID=532715">this article</a>
+                                for details on setting up this ASP.NET application to support logging in via external services.
+                            </p>
+                        </div>
+                    }
+                    else
+                    {
+                        <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
+                            <div>
+                                <p>
+                                    @foreach (var provider in Model.ExternalLogins)
+                                    {
+                                        <button type="submit" class="btn btn-primary" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">@provider.DisplayName</button>
+                                    }
+                                </p>
+                            </div>
+                        </form>
+                    }
+                }
+            </section>
+        </div>*@
+
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

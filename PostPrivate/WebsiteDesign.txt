@@ -1,0 +1,39 @@
+1. Goal Identification: The goal behind this project is to design
+	and implement a social media website which is based upon
+	three core principles: user data privacy, free speech, and simplicity of design.
+	Website's primary use is to connect friends and family. No social engineering, corrective algorithms,
+	tampering, or intrusive monitoring. Straightforward News Feeds are generated
+	in unaltered chronological sequence of times that friends/pages posts were actually
+	posted. 
+
+2. Scope Definition: 
+	pages: (Home page), Profile Page, Account
+	page (change email, password, deactivate account,
+	Settings page (privacy settings), 
+	About page, Admin Page, Nofitications Page, 
+	Messages Page, Instant Messaging Interface, Photo Album page
+
+	Pop Up/Modal Boxes: Profile Pic mini box (when hovering over profile pic; contains link to the full user profile)
+
+	features: News Feed, Persistent Posting
+	service, Profile (About, Contact, Photos, Posts, Bio,
+	joined date, UserName, friends list, liked posts history,
+	profile pic),
+	Friend/Unfriend feature,  likes,
+	repost, Search Feature, Follow/Unfollow feature,
+	
+	functions: IsFriend(part of People class, takes in a user id
+	and searches the entire friendsList<Person> for that specific
+	user id; returns true if a match is found; else false
+
+3. Sitemap, ERD, UML - LucidChart; Wireframes - uncomplete
+4. Content Creation (utilizing ASP.NET core MVC)
+5. Visual Elements (utilizing BootStrap)
+6. Testing (continuous)
+7. Launch - will happen once initial functionalities are complete;
+	    extra functionality will be added one piece at a time;
+	    this is a continuous work in progress and showcase of
+ 	    my technical abilities within ASP.NET
+
+
+

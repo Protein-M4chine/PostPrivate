@@ -1,0 +1,79 @@
+﻿@page "{id:min(1)}"
+@model PostPrivate.DetailsModel
+@{
+    var photoPath = "~/images/" + (@Model.Profile.PhotoName ?? "/person.svg");
+    ViewData["Title"] = " - " + Model.Profile.FName + "'s Profile";
+
+}
+
+<div class="row">
+    <div class="col-sm-3">
+        <div class="card" style="margin:20px">
+            <div class="card-header text-center">
+                <h3>@Model.Profile.FName @Model.Profile.LName</h3>
+                <p>@@@Model.Profile.UserName</p>
+            </div>
+            <div class="card-body text-center">
+                <img class="card-img-top .imgthumbnail" src="@photoPath" asp-append-version="true" />
+            </div>
+            <div class="card-footer text-center">
+                <p>
+                    joined @Model.Profile.DateJoined
+                    <img class="card-img-top .imgthumbnail" src="~/images/icons-1.0.0-alpha2/icons-1.0.0-alpha2/icons/calendar.svg" id="calendaricon" asp-append-version="true" />
+                </p>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body text-center">
+                <h5 class="card-title">Bio</h5>
+                <p class="card-text">@Model.Profile.Bio</p>
+                <a href="#" class="btn btn-outline-primary">Edit</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-8">
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" id="postline-tab" data-toggle="tab" href="#postline" role="tab" aria-controls="postline" aria-selected="true">PostLine</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="about-tab" data-toggle="tab" href="#about" role="tab" aria-controls="about" aria-selected="false">About</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="friends-tab" data-toggle="tab" href="#friends" role="tab" aria-controls="friends" aria-selected="false">Friends</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="photos-tab" data-toggle="tab" href="#photos" role="tab" aria-controls="photos" aria-selected="false">Photos</a>
+            </li>
+        </ul>
+        <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active" id="postline" role="tabpanel" aria-labelledby="postline-tab">...</div>
+            <div class="tab-pane fade" id="about" role="tabpanel" aria-labelledby="about-tab">...</div>
+            <div class="tab-pane fade" id="friends" role="tabpanel" aria-labelledby="friends-tab"><br />
+                <div class="container">
+                      <div class="row"> 
+                           @foreach(var friend in Model.FriendsList)
+                           {
+                                var friendPhotoPath = "~/images/" + (friend.PhotoName ?? "/person.svg");
+
+                               <div class="col-sm-6">
+                                   <ul class="list-group">
+                                       <li class="list-group-item" style="margin-bottom:20px;">
+                                           <div class="media">
+                                               <img class="friendthumbnail mr-3" src="@friendPhotoPath" asp-append-version="true" alt="...">
+                                               <div class="media-body">
+                                                   <a asp-page="/profile/details" asp-route-Id="@friend.Id"><h5 class="mb-1">@friend.FName @friend.LName</h5></a>
+                                                   <small>Friends since @DateTime.Now.ToString("MMMM yyyy")</small>
+                                               </div>
+                                           </div>
+                                       </li>
+                                   </ul>
+                              </div> 
+                           }
+                      </div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="photos" role="tabpanel" aria-labelledby="photos-tab">...</div>
+        </div>
+    </div>
+</div>
