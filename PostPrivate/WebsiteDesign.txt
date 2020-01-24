@@ -20,20 +20,14 @@
 	joined date, UserName, friends list, liked posts history,
 	profile pic),
 	Friend/Unfriend feature,  likes,
-	repost, Search Feature, Follow/Unfollow feature,
-	
-	functions: IsFriend(part of People class, takes in a user id
-	and searches the entire friendsList<Person> for that specific
-	user id; returns true if a match is found; else false
+	repost, Search Feature, Follow/Unfollow feature
 
-3. Sitemap, ERD, UML - LucidChart; Wireframes - uncomplete
-4. Content Creation (utilizing ASP.NET core MVC)
-5. Visual Elements (utilizing BootStrap)
+3. Sitemap, ERD, UML - LucidChart; Wireframes - complete
+4. Content Creation (utilizing ASP.NET core Razor Pages)
+5. Frontend, Visual Elements (utilizing BootStrap)
 6. Testing (continuous)
-7. Launch - will happen once initial functionalities are complete;
-	    extra functionality will be added one piece at a time;
-	    this is a continuous work in progress and showcase of
- 	    my technical abilities within ASP.NET
+7. Launch - will happen once initial functionality is complete;
+	    extra functionality will be added one piece at a time over time
 
 
 
